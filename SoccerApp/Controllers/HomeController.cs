@@ -74,6 +74,22 @@ namespace SoccerApp.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult CreateTeam(Team team)
+        {
+            db.Teams.Add(team);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult CreateTeam()
+        {
+            SelectList teams = new SelectList(db.Teams, "Id", "Name", "Coach");
+            ViewBag.Teams = teams;
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
